@@ -1,12 +1,16 @@
 package com.b1n.springdemo.annotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 @Component
+@Scope("prototype")
 public class TennisCoach implements Coach {
     @Autowired
-    @Qualifier("happyFortuneService")
+    @Qualifier("randomFortuneService")
     private FortuneService fortuneService;
 //    So, the first thing Spring will do
 //    is it will actually construct the class
@@ -22,6 +26,16 @@ public class TennisCoach implements Coach {
 
     public TennisCoach(){
         System.out.println(">> TennisCoach: inside default constructor");
+    }
+
+    @PostConstruct
+    public void doMyStartupStuff(){
+        System.out.println(">> Tennis coach: inside of doMyStartupStuff()");
+    }
+
+    @PreDestroy
+    public void doMyCleanupStuff(){
+        System.out.println(">> Tennis coach: inside of doMyCleanupStuff()");
     }
 //
 //    @Autowired

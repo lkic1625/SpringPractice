@@ -1,11 +1,14 @@
 package com.b1n.springdemo.annotation;
 
-import com.luv2code.springdemo.FortuneService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.Random;
 
+@Component
 public class RandomFortuneService implements FortuneService {
 
+    @Value("${fortune.array}")
     private String[] fortuneArray;
 
     public void setFortuneArray(String[] fortuneArray) {
